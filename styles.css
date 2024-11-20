@@ -1,0 +1,259 @@
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+      text-align: center;
+      padding: 50px;
+    }
+    h1, h2 {
+      color: #333;
+    }
+    p {
+      color: #666;
+      line-height: 1.6;
+    }
+    .aligncenter {
+     text-align: center;
+     }
+  .button-container {
+    text-align: center; /* Center-align the buttons */
+  }
+
+  /* CSS for each button */
+  .image-button {
+    display: inline-block;
+    border: none;
+    padding: 0;
+    margin: 0 10px; /* Add some space between buttons */
+    background: none;
+    cursor: pointer;
+    border-radius: 10px; /* Rounded corners */
+    overflow: hidden; /* Ensure rounded corners are visible */
+    position: relative; /* Positioning for the text */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+  }
+
+  /* CSS for the image in each button */
+  .image-button img {
+    width: 250px; /* Adjust the width of the image */
+    height: 350;
+    display: block;
+  }
+
+  /* Darken the button on hover */
+  .image-button:hover {
+    background-color: rgba(0, 0, 0, 0.2); /* Darken the background color */
+  }
+
+  /* CSS for the text in each button */
+  .image-button-text {
+    position: absolute;
+    bottom: 10px; /* Adjust the vertical position of the text */
+    left: 50%;
+    transform: translateX(-50%);
+    color: transparent; /* Initially transparent */
+    font-size: 16px;
+    font-family: 'Genova', sans-serif; /* Use Genova font */
+    opacity: 0; /* Initially hidden */
+    transition: opacity 0.3s, color 0.3s; /* Smooth transition for visibility and color */
+  }
+
+  /* Show the text when hovering */
+  .image-button:hover .image-button-text {
+    opacity: 1; /* Show the text */
+    color: green; /* Change the text color to black */
+  }
+  .cool-button {
+  padding: 10px 20px;
+  background-color: #e74c3c;
+  text-decoration: none; /* Remove underline */
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  }
+
+     .cool-button:hover {
+  background-color: transparent;
+  border: 2px solid #e74c3c;
+  color: #e74c3c;
+    }
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      margin: 10px;
+      background-color: #007bff;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+    }
+    .btn:hover {
+      background-color: #0056b3;
+    }
+    .authors {
+      margin-bottom: 20px;
+    }
+    .authors a {
+      color: #007bff;
+      text-decoration: none;
+      font-size: 16px;
+      transition: color 0.3s ease;
+    }
+    .authors a:hover {
+      color: #0056b3;
+    }
+    .abstract {
+      margin-top: 50px;
+      text-align: justify;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+    .abstract h2 {
+      text-align: center;
+      color: #333;
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+    .authors {
+      margin-top: 30px;
+    }
+    .authors a {
+      margin: 5px;
+      text-decoration: none;
+      color: #007bff;
+      font-size: 16px;
+      transition: color 0.3s ease;
+    }
+    .authors a:hover {
+      color: #0056b3;
+    }
+    .tasks-container {
+      text-align: justify;
+      max-width: 800px;
+      margin: auto;
+      margin-top: 50px;
+    }
+    .tasks {
+      margin-top: 20px;
+    }
+    .tasks h2 {
+      color: #333;
+      font-size: 24px;
+      text-align: left;
+      margin-bottom: 20px;
+    }
+    .bibtex-container {
+      text-align: left;
+      max-width: 800px;
+      margin: auto;
+      margin-top: 50px;
+    }
+    .bibtex {
+      margin-top: 20px;
+      background-color: #fff;
+      color: #bff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+    .bibtex h2 {
+      color: #000;
+      font-size: 24px;
+      text-align: left;
+      margin-bottom: 20px;
+    }
+    .bibtex pre {
+      color: #fff;
+      font-size: 14px;
+      background-color: #444;
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    .line {
+      border-bottom: 2px solid #ddd;
+      margin: 20px 0;
+    }
+    .paper-tasks img {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+    /* Styles for Results Section */
+    .results {
+      max-width: 800px;
+      margin: auto;
+      margin-top: 50px;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+    .results h2 {
+      color: #333;
+      font-size: 24px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .result-item {
+      margin-top: 20px;
+      text-align: left;
+    }
+    .result-item h3 {
+      color: #333;
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+    }
+    .acknowledgement {
+      margin-top: 50px;
+      text-align: justify;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+    .acknowledgement h2 {
+      text-align: center;
+      color: #333;
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+    .logo-container {
+      position: absolute;
+      top: 40px;
+      right: 40px;
+    }
+    .logo-container img {
+      width: 100px; /* Adjust size as needed */
+      height: auto;
+      margin-left: 10px; /* Add margin between logos */
+      }
+    .logo-container2 {
+      position: absolute;
+      top: 40px;
+      left: 40px;
+    }
+    .logo-container2 img {
+      width: 100px; /* Adjust size as needed */
+      height: auto;
+      margin-right: 10px; /* Add margin between logos */
+      }
+  </style>

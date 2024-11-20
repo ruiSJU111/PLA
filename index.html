@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Historical Printed Ornaments: Dataset and Tasks</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+      text-align: center;
+      padding: 50px;
+    }
+
+    h1,
+    h2 {
+      color: #333;
+    }
+
+    p {
+      color: #666;
+      line-height: 1.6;
+    }
+
+    .aligncenter {
+      text-align: center;
+    }
+
+    .button-container {
+      display: inline-block;
+      margin-bottom: 20px;
+    }
+
+    /* CSS for each button */
+    .image-button {
+      display: inline-block;
+      border: none;
+      padding: 0;
+      margin: 0 5px;
+      /* Add some space between buttons */
+      background: none;
+      cursor: pointer;
+      border-radius: 10px;
+      /* Rounded corners */
+      overflow: hidden;
+      /* Ensure rounded corners are visible */
+      position: relative;
+      /* Positioning for the text */
+      transition: background-color 0.3s;
+      /* Smooth transition for hover effect */
+    }
+
+    /* CSS for the image in each button */
+    .image-button img {
+      display: block;
+    }
+
+    /* Darken the button on hover */
+    .image-button:hover {
+      background-color: rgba(0, 0, 0, 0.2);
+      /* Darken the background color */
+    }
+
+    /* CSS for the text in each button */
+    .image-button-text {
+      position: absolute;
+      bottom: 10px;
+      /* Adjust the vertical position of the text */
+      left: 50%;
+      transform: translateX(-50%);
+      color: transparent;
+      /* Initially transparent */
+      font-size: 16px;
+      font-family: 'Genova', sans-serif;
+      /* Use Genova font */
+      opacity: 0;
+      /* Initially hidden */
+      transition: opacity 0.3s, color 0.3s;
+      /* Smooth transition for visibility and color */
+    }
+
+    /* Show the text when hovering */
+    .image-button:hover .image-button-text {
+      opacity: 1;
+      /* Show the text */
+      color: black;
+      /* Change the text color to black */
+      background-color: white;
+    }
+
+    .cool-button {
+      display: inline-block;
+      overflow: hidden;
+      position: relative;
+      padding: 10px 20px;
+      background-color: #e74c3c;
+      text-decoration: none;
+      color: #ffffff;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .cool-button:hover {
+      background-color: transparent;
+      border: 2px solid #e74c3c;
+      color: #e74c3c;
+    }
+
+    .button-blue {
+      display: inline-block;
+      overflow: hidden;
+      position: relative;
+      padding: 10px 20px;
+      background-color: #007bff;
+      text-decoration: none;
+      color: #ffffff;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .button-blue:hover {
+      background-color: transparent;
+      border: 2px solid #007bff;
+      color: #007bff;
+    }
+
+    .authors {
+      margin: auto;
+      max-width: 800px;
+      margin-bottom: 30px;
+      margin-top: 30px;
+    }
+
+    .authors a {
+      margin: 10px;
+      text-decoration: none;
+      color: #007bff;
+      font-size: 16px;
+      transition: color 0.3s ease;
+    }
+
+    .authors a:hover {
+      color: #0056b3;
+    }
+
+    .tasks-container {
+      text-align: justify;
+      max-width: 800px;
+      margin: auto;
+      margin-top: 50px;
+    }
+
+    .tasks {
+      margin-top: 20px;
+    }
+
+    .tasks h2 {
+      color: #333;
+      font-size: 24px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .bibtex-container {
+      max-width: 800px;
+      margin: auto;
+      margin-top: 50px;
+    }
+
+    .bibtex {
+      margin-top: 20px;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .bibtex h2 {
+      text-align: center;
+      color: #000;
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    .bibtex p {
+      overflow-wrap: break-word;
+      color: white;
+      background-color: #444;
+      font-size: 14px;
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+
+    .line {
+      border-bottom: 2px solid #ddd;
+      margin: 20px 0;
+    }
+
+    .teaser img {
+      max-width: 800px;
+      display: inline-block;
+      overflow: auto;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 50px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Styles for Results Section */
+    .results {
+      text-align: justify;
+      max-width: 800px;
+      margin: auto;
+      margin-top: 50px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .results h2 {
+      color: #333;
+      font-size: 24px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .result-item {
+      margin-top: 20px;
+      margin-right: auto;
+      margin-left: auto;
+    }
+
+    .result-item h3 {
+      color: #333;
+      font-size: 20px;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    .headings {
+      max-width: 1400px;
+      margin: auto;
+    }
+  </style>
+</head>
+<div class="headings">
+</div>
+<h1>Historical Palm Leaf Analysis for Multi-script Low Resource Languages</h1>
+
+<div class="authors">
+  <a">Nimol Thuon*</a>
+  <a href="https://sprateam-ustc.github.io/" target="_blank">Jun Du</a>
+  <a href="http://home.ustc.edu.cn/~xysszjs/" target="_blank">Jianshu Zhang</a>
+  <a>Zhenrong Zhang </a>
+  <a>Jiefeng Ma</a>
+  <a">Ranysakol Thuon</a>
+  <a>Panhapin Theang </a>
+  <a>Chan Theara Sok</a>
+</div>
+  <h4>National Engineering Research Center of Speech and Language Information Processing (NERC-SLIP), USTC, CHINA</h4>
+  <h4>IFlyTek Research, Hefei, CHINA</h4>
+<h4>Institue of Technology of Cambodia, CAMBODIA</h4>
+<h4>Universitas Gadjah Mada, INDONESIA</h4>
+<div class="button-container">
+  <a href="https://nimol89.github.io/datacollection" target="_blank" class="button-blue">Data Collection</a>
+  <a href="https://nimol89.github.io/enhancement/" target="_blank" class="cool-button">Document Enhancement</a>
+  <a href="https://nimol89.github.io/classification/" target="_blank" class="button-blue">Isolated Glyph Classification</a>
+  <a href="https://nimol89.github.io/sada/" target="_blank"class="cool-button">Text Recognition </a>
+</div>
+<script>
+  function scrollToSection(sectionId) {
+    var section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+</script>
+<div class="teaser">
+  <img src="./images/Untitled drawing(4).png" width=100% height=100%>
+</div>
+<div class="results">
+<h2>Objective</h2>
+<p>
+    The Palm Leaf Manuscript Dataset is a unique compilation of historical scripts from Southeast Asia, representing centuries of rich cultural heritage. It features diverse scripts such as Sundanese, Balinese, and Khmer, traditionally used to document religious texts, historical records, and cultural narratives on palm leaves. The dataset supports various tasks in palm leaf analysis, including data collection, isolated glyph classification, document enhancement, and text recognition.
+</p>
+<h3>Project Task Details:</h3>
+<ul>
+    <li><a href="https://nimol89.github.io/datacollection" target="_blank">Data Collection</a></li>
+    <li><a href="https://nimol89.github.io/enhancement/" target="_blank">Document Enhancement</a></li>
+    <li><a href="https://nimol89.github.io/classification/" target="_blank">Isolated Glyph Classification</a></li>
+    <li><a href="https://nimol89.github.io/sada/" target="_blank">Text Recognition </a></li>
+</ul>
+
+    <div class="dataset-section">
+    <h2>Sundanese Manuscripts</h2>
+    <p>
+        Sundanese palm leaf manuscripts, originating from the West Java region, are written in the Old Sundanese script, which is derived from the Brahmi family of scripts. The texts primarily cover literary works, religious teachings, and ancient epics. 
+        This dataset contains high-quality images that showcase the distinct stylistic elements of the script, such as rounded letterforms and complex ligatures. The collection is essential for studying the evolution of Sundanese script styles and offers a unique opportunity to explore the influence of Javanese and Balinese scripts on Sundanese writing.
+    </p>
+    <p>
+        The primary challenge in processing these manuscripts is the high variability in character shapes, caused by natural wear and tear over centuries. Additionally, the presence of overlapping text lines and faded inscriptions requires advanced image enhancement techniques for effective analysis and recognition.
+    </p>
+</div>
+
+<div class="dataset-section">
+    <h2>Balinese Manuscripts</h2>
+    <p>
+        Balinese manuscripts, primarily used in Bali and Lombok, are inscribed in the traditional Balinese script. These manuscripts encompass a rich array of topics, including religious rituals, traditional medicine, cosmology, and folklore. The script itself is intricate, featuring a mix of base consonants and vowel diacritics that create complex ligatures and stacked forms.
+    </p>
+    <p>
+        The dataset includes both well-preserved and severely degraded samples, offering a comprehensive view of the diversity in Balinese manuscripts. One of the challenges in analyzing these texts is the presence of decorative elements and illustrations that intertwine with the script, complicating the segmentation and recognition processes.
+    </p>
+    <p>
+        The high level of script variation within Balinese manuscripts requires robust feature extraction techniques and contextual modeling to accurately decode and classify the script components. This dataset serves as a valuable resource for understanding how the Balinese script evolved and interacted with other Southeast Asian writing systems.
+    </p>
+</div>
+
+<div class="dataset-section">
+    <h2>Khmer Manuscripts</h2>
+    <p>
+        Khmer palm leaf manuscripts from Cambodia are written in the Khmer script, one of the oldest scripts in Southeast Asia, used for documenting Buddhist teachings, royal decrees, medicinal knowledge, and classical literature. The Khmer script is known for its curvilinear shapes and unique subscript characters, which add complexity to the text structure.
+    </p>
+    <p>
+        The Khmer collection in this dataset aims to preserve the delicate balance between preserving historical authenticity and applying digital restoration techniques. Many of these manuscripts are severely degraded, with characters that are either faint or fragmented. To overcome these challenges, the dataset includes enhanced images that restore the legibility of faded characters while maintaining the original look and feel of the manuscripts.
+    </p>
+    <p>
+        The intricate nature of the Khmer script, combined with the physical deterioration of the palm leaf surfaces, requires specialized image processing methods for character restoration and text extraction. This collection is pivotal for developing OCR systems capable of handling the unique properties of Southeast Asian scripts.
+    </p>
+</div>
+
+<div class="dataset-section">
+    <h2>Mixed Script Dataset</h2>
+    <p>
+        The mixed script dataset combines samples from Sundanese, Balinese, and Khmer manuscripts, providing a comprehensive platform for multi-script analysis and cross-lingual studies. By integrating multiple scripts into a single dataset, it enables researchers to tackle challenging tasks such as script identification, multi-script OCR, and cross-lingual document alignment.
+    </p>
+    <p>
+        The mixed dataset is curated to include variations in script styles, degradation patterns, and document layouts, simulating real-world scenarios where multiple languages and scripts co-exist in the same text. This collection is instrumental for developing robust models that generalize across different scripts, enhancing the understanding and preservation of Southeast Asian heritage.
+    </p>
+    <p>
+        A key focus of this dataset is to promote the creation of multi-task learning models that can simultaneously classify, segment, and recognize diverse scripts. The presence of mixed scripts also offers a unique opportunity for exploring transfer learning and domain adaptation techniques to improve model performance across low-resource languages.
+    </p>
+</div>
+
+</div>
+
+<!-- Results Section -->
+<div class="results">
+  <h2>Conclusion</h2>
+  
+  <div class="result-item">
+    <h3>Research Contribution</h3>
+    <p>
+      This research introduces novel methodologies for the preservation and analysis of Southeast Asian palm leaf manuscripts, addressing significant challenges in digital restoration, glyph recognition, and multi-script analysis. Key contributions include the development of the PALM-GANs framework for image enhancement, the EFF framework for isolated glyph classification, and the SADA technique for synthesizing high-quality text images. These models demonstrate state-of-the-art performance across multiple metrics, establishing new benchmarks for palm leaf manuscript analysis.
+    </p>
+    <p>
+      Additionally, this work has created a comprehensive palm leaf manuscript dataset encompassing Sundanese, Balinese, and Khmer scripts, along with a mixed script collection, providing researchers with valuable resources for further exploration in historical document analysis.
+    </p>
+  </div>
+
+  <div class="result-item">
+    <h3>Research Impact</h3>
+    <p>
+      The impact of this research extends beyond technical advancements, playing a crucial role in the cultural preservation of Southeast Asian heritage. By developing robust digital restoration and recognition tools, this research helps safeguard the contents of endangered manuscripts, making them accessible to scholars and the general public. The enhanced models and datasets contribute to the digitization efforts of cultural institutions, supporting ongoing initiatives to preserve, study, and share these valuable historical texts.
+    </p>
+    <p>
+      Furthermore, the mixed script dataset has significant implications for multilingual document processing, providing insights into the development of generalized OCR systems for complex and low-resource languages. The methodologies presented in this work can be adapted for similar preservation efforts in other regions, promoting the conservation of diverse linguistic and cultural records worldwide.
+    </p>
+  </div>
+
+  <div class="result-item">
+    <h3>Future Works</h3>
+    <p>
+      Future research directions include expanding the dataset to incorporate additional Southeast Asian scripts such as Javanese and Lontara, as well as exploring deeper hierarchical models for more accurate script classification. Another promising direction is the integration of multimodal approaches, combining visual, linguistic, and contextual cues to further enhance manuscript understanding and recognition.
+    </p>
+    <p>
+      Further efforts will also focus on improving the PALM-GANs and EFF frameworks by integrating recent advances in generative models and efficient transformers, enhancing the models' capacity to handle severely degraded manuscripts. Additionally, research on zero-shot and few-shot learning techniques will be explored to reduce the reliance on large annotated datasets, making these methods more applicable to rare and low-resource manuscripts.
+    </p>
+    <p>
+      Finally, the development of interactive tools for historians, linguists, and conservators will be prioritized, enabling them to actively participate in the digital preservation process through easy-to-use interfaces and AI-assisted annotations, bridging the gap between machine learning research and practical heritage conservation.
+    </p>
+  </div>
+</div>
+
+
+</div>
+
+<div class="tasks-container">
+  <div class="tasks">
+    <h2>Acknowledgement</h2>
+    <div class="line"></div> <!-- Line Separator -->
+    <p>This work was primarily conducted by Nimol Thuon, with funding support from the Chinese Academy of Sciences (CAS), The World Academy of Sciences (TWAS, Italy), and the National Natural Science Foundation of China (NSFC). The author also acknowledges the valuable contributions and collaboration from partners in Cambodia, China, and Indonesia.
+    </p>
+    <h2>References</h2>
+    <div class="line"></div> <!-- Line Separator -->
+    <p>[1] Kesiman, M. W. A., Valy, D., Burie, J. C., Paulus, E., Suryani, M., Hadi, S., ... & Ogier, J. M. (2018, August). ICFHR 2018 competition on document image analysis tasks for southeast asian palm leaf manuscripts. In 2018 16th International Conference on Frontiers in Handwriting Recognition (ICFHR) (pp. 483-488). IEEE.<br>
+      [2] Valy, D., Verleysen, M., Chhun, S., & Burie, J. C. (2017, November). A new khmer palm leaf manuscript dataset for document analysis and recognition: Sleukrith set. In Proceedings of the 4th International Workshop on Historical Document Imaging and Processing (pp. 1-6). <br>
+      [3] Suryani, M., Paulus, E., Hadi, S., Darsa, U. A., & Burie, J. C. (2017, November). The handwritten sundanese palm leaf manuscript dataset from 15th century. In 2017 14th IAPR international conference on document analysis and recognition (ICDAR) (Vol. 1, pp. 796-800). IEEE.<br>
+      [4] Burie, J. C., Coustaty, M., Hadi, S., Kesiman, M. W. A., Ogier, J. M., Paulus, E., ... & Valy, D. (2016, October). ICFHR2016 competition on the analysis of handwritten text in images of balinese palm leaf manuscripts. In 2016 15th International Conference on Frontiers in Handwriting Recognition (ICFHR) (pp. 596-601). IEEE. <br>
+      [5] Thuon, N., Du, J., Zhang, Z., Ma, J., & Hu, P. (2024). Generate, transform, and clean: the role of GANs and transformers in palm leaf manuscript generation and enhancement. International Journal on Document Analysis and Recognition (IJDAR), 1-18. <br>
+    </p>
+  </div>
+</div>
+
+</body>
+
+</html>
